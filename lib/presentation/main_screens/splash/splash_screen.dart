@@ -59,8 +59,10 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _filterSplashImage(),
+    return SafeArea(
+      child: Scaffold(
+        body: _filterSplashImage(),
+      ),
     );
   }
 

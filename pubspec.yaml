@@ -15,6 +15,7 @@ dependencies:
   #UI
   date_time_picker: ^2.1.0
   fluttertoast: ^8.0.9
+  intl: ^0.17.0
   #state management
   flutter_bloc: ^8.0.1
 
