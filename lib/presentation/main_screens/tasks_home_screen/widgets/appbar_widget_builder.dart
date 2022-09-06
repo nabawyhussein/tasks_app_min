@@ -11,28 +11,46 @@ class BuildCurcvedContainer extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSize.size(context).height * .03 ,
-      decoration: const BoxDecoration(
-        color: ColorManger.primary,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(AppSize.size(context).width * .075),
+    return Column(
+      children: [
+        Container(
+          height: AppSize.size(context).height * .03 ,
+          decoration: const BoxDecoration(
+            color: ColorManger.primary,
           ),
-
-        ),
-        child: Container(
+          child: Container(
             decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(AppSize.size(context).width * .075),
+                bottomLeft: Radius.circular(AppSize.size(context).width * .075),
               ),
 
             ),
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(AppSize.size(context).width * .075),
+                  ),
+
+                ),
+            ),
+          ),
         ),
-      ),
+        Container(
+          color: Colors.white,
+          child: Container(
+            width: AppSize.size(context).width,
+            height: AppSize.size(context).height*0.05,
+            decoration: BoxDecoration(
+                color: ColorManger.primary,
+                border: Border.all(width: 0, color: ColorManger.primary),
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(AppSize.size(context).width * .1),
+                )),
+
+          ),
+        ),
+      ],
     );
   }
 }
