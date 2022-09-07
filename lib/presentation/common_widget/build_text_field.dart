@@ -45,6 +45,10 @@ class BuildTextField extends StatelessWidget {
                 borderSide:
                     BorderSide(color: ColorManger.primarySecondColor, width: 2),
               ),
+              focusedErrorBorder: UnderlineInputBorder(
+                borderSide:
+                BorderSide(color: ColorManger.primarySecondColor, width: 2),
+              ),
               errorBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: ColorManger.error, width: 2),
               ),
