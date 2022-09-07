@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.taskmina">
    <application
-        android:label="taskmina"
+        android:label="Nabawy Task"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_minlogo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
