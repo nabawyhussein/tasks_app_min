@@ -29,10 +29,16 @@ class BuildButtonWidget extends StatelessWidget {
           )
       ),
       onPressed: onPressed,
-      child: Text(txt,
-          style: TextStyle(
-              color:Colors.white,
-              fontSize: AppSize.size(context).width * .045)),
+      child: Container(
+        alignment: Alignment.center,
+        width: AppSize.size(context).width,
+        height: AppSize.size(context).height*0.06,
+        child: Text(txt,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color:Colors.white,
+                fontSize: AppSize.size(context).width * .055)),
+      ),
     );
   }
 }

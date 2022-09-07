@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:taskmina/bloc/user_tasks_cubit/tasks_operations_cubit.dart';
 import 'package:taskmina/presentation/common_widget/build_text.dart';
 import 'package:taskmina/presentation/main_screens/add_task_screen/add_task_screen.dart';
 import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/curved_container_widget_builder.dart';
@@ -24,16 +26,31 @@ class TasksHomeScreen extends StatelessWidget {
           children: [
             headerWidget(context),
             const BuildCurcvedContainer(),
-            Expanded(
-              child: ListView.builder(
+            BlocBuilder<TasksOperationsCubit, TasksOperationsState>(
+  builder: (context, state) {
+    TasksOperationsCubit tasksCubit = BlocProvider.of<TasksOperationsCubit>(context);
+    return Expanded(
+              child:
+              tasksCubit.tasksList.isEmpty?
+                  Center(
+                    child: BuildText(
+                      txt: "No Tasks Yet",
+                      color: Colors.white,
+                      fontSize: AppSize.size(context).width*0.06,
+                      fontWeight: FontWeight.w600,),
+                  )
+                  :
+              ListView.builder(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
                   padding: EdgeInsets.zero,
-                  itemCount: 20,
+                  itemCount: tasksCubit.tasksList.length,
                   itemBuilder: (context, index) {
-                    return  TaskWidgetItemBuilder();
+                    return  TaskWidgetItemBuilder(taskModel: tasksCubit.tasksList[index],);
                   }),
-            )
+            );
+  },
+)
 
           ],
         ),

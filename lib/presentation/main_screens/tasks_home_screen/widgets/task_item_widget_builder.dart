@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:taskmina/models/task_model_vm.dart';
 
 import '../../../common_widget/build_text.dart';
 import '../../../resources/app_size_res.dart';
 import '../../../resources/color_manger.dart';
 
 class TaskWidgetItemBuilder extends StatelessWidget {
-  const TaskWidgetItemBuilder({Key? key}) : super(key: key);
-
+  TaskWidgetItemBuilder({Key? key,required this.taskModel}) : super(key: key);
+  TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,12 +37,12 @@ class TaskWidgetItemBuilder extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BuildText(
-                      txt: 'Team Meating',
+                      txt: taskModel.taskName,
                       fontSize: AppSize.size(context).width*0.06,
                       fontWeight: FontWeight.w600,),
                     Expanded(
                       child: BuildText(
-                        txt: "desc mainAxis Alignment: MainAxis Alignme nt.center mainAxisAli gnment: MainAxis Alignme nt.center",
+                        txt: taskModel.taskDescription,
                         fontSize: AppSize.size(context).width*0.035,
                         color: ColorManger.primarySecondColor,
                         fontWeight: FontWeight.w600,),
@@ -67,7 +68,7 @@ class TaskWidgetItemBuilder extends StatelessWidget {
               ),
             ),
             child: BuildText(
-              txt: '10 :00 AM',
+              txt: taskModel.taskStartTime,
               fontSize: AppSize.size(context).width*0.04,
               fontWeight: FontWeight.bold,
               color: Colors.white,

@@ -38,83 +38,105 @@ class CreateTaskScreen extends StatelessWidget {
 
         },)],
       ),
-      body:Form(
-        //final FormState? form = formKeyPublish.currentState;
-        key: createTaskFormKey,
-        child: Column(
-          children: [
-            Padding(
-              padding:  EdgeInsets.all(AppSize.size(context).width*0.05),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BuildText(
-                        txt: 'Create New Tasks',
-                        fontSize: AppSize.size(context).width*0.08,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      Icon(Icons.event_note_rounded,
-                        color: ColorManger.primarySecondColor,
-                        size: AppSize.size(context).width*0.1,
+      body:SingleChildScrollView(
+        child: Form(
+          //final FormState? form = formKeyPublish.currentState;
+          key: createTaskFormKey,
+          child: Column(
+            children: [
+              Padding(
+                padding:  EdgeInsets.all(AppSize.size(context).width*0.05),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BuildText(
+                          txt: 'Create New Tasks',
+                          fontSize: AppSize.size(context).width*0.08,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        Icon(Icons.event_note_rounded,
+                          color: ColorManger.primarySecondColor,
+                          size: AppSize.size(context).width*0.1,
 
-                      )
-                    ],
-                  ),
-                  BuildTextField(controller: taskNameController,headerTxt: "Task Name",),
-                  SizedBox(height: AppSize.size(context).height*0.03,),
-                  BuildDatePicker(textController: taskDateController,headerTxt: "Date",
-                  width: AppSize.size(context).width*0.45,
-                  ),
-                  SizedBox(height: AppSize.size(context).height*0.03,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TimePickerBuilder(headerTxt: 'Start', controller:taskTimeStartController,
-                        width: AppSize.size(context).width*0.35,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: AppSize.size(context).height*0.03,),
+                    BuildTextField(controller: taskNameController,headerTxt: "Task Name",),
+                    SizedBox(height: AppSize.size(context).height*0.05,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BuildDatePicker(textController: taskDateController,headerTxt: "Date",
+                        width: AppSize.size(context).width*0.45,
+                        ),
+                        Container(
+                          height: AppSize.size(context).height*0.06,
+                          decoration: BoxDecoration(
+                            color: ColorManger.primary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(icon: const
+                          Icon(Icons.calendar_today_outlined,color: Colors.white,
+                          ), onPressed: () {
+                          },),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSize.size(context).height*0.05,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TimePickerBuilder(headerTxt: 'Start', controller:taskTimeStartController,
+                          width: AppSize.size(context).width*0.35,
 
-                      ),
-                      TimePickerBuilder(headerTxt: 'End', controller:taskTimeEndController,
-                        width: AppSize.size(context).width*0.35,
+                        ),
+                        TimePickerBuilder(headerTxt: 'End', controller:taskTimeEndController,
+                          width: AppSize.size(context).width*0.35,
 
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: AppSize.size(context).height*0.03,),
-                  BuildTextField(controller: taskDescriptionController,
-                    headerTxt: "Description",),
-                  BuildButtonWidget(txt: 'Add Task',
-                  onPressed: (){
-                    final FormState? form = createTaskFormKey.currentState;
-                    if(form!.validate()==true){
-                      if(taskTimeEndController.text.isEmpty){
-                        createToast("Enter Valid End Time");
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSize.size(context).height*0.05,),
+                    BuildTextField(controller: taskDescriptionController,
+                      headerTxt: "Description",),
+                    SizedBox(height: AppSize.size(context).height*0.15,),
+                    BuildButtonWidget(txt: 'Add Task',
+                    onPressed: (){
+                      final FormState? form = createTaskFormKey.currentState;
+                      if(form!.validate()==true){
+                        if(taskTimeEndController.text.isEmpty){
+                          createToast("Enter Valid End Time");
+                        }
+                        else if(taskTimeStartController.text.isEmpty){
+                          createToast("Enter Valid Start Time");
+                        }
+                        else{
+                          TasksOperationsCubit addTask = BlocProvider.of<TasksOperationsCubit>(context);
+
+                          TaskModel newTaskVm =TaskModel(
+                              taskDate: taskDateController.text,
+                              taskDescription: taskDescriptionController.text,
+                              taskEndTime: taskTimeEndController.text,
+                              taskName: taskNameController.text,
+                              taskStartTime: taskTimeStartController.text,
+                              taskCategory: "");
+                         addTask.addTask(newTaskVm);
+                          Navigator.of(context).pop();
+                          createToast("TaskCreated Successfully");
+                        }
                       }
-                      else if(taskTimeStartController.text.isEmpty){
-                        createToast("Enter Valid Start Time");
-                      }
-                      else{
-                        TasksOperationsCubit addTask = BlocProvider.of<TasksOperationsCubit>(context);
+                    },
+                    )
 
-                        TaskModel newTaskVm =TaskModel(
-                            taskDate: taskDateController.text,
-                            taskDescription: taskDescriptionController.text,
-                            taskEndTime: taskTimeEndController.text,
-                            taskName: taskNameController.text,
-                            taskStartTime: taskTimeStartController.text,
-                            taskCategory: "");
-                       addTask.addTask(newTaskVm);
-                      }
-                    }
-                  },
-                  )
-
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
