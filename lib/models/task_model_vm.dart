@@ -4,7 +4,7 @@ class TaskModel {
   String taskEndTime;
   String taskDescription;
   String taskCategory;
-  DateTime taskDate;
+  String taskDate;
 
   TaskModel(
       {required this.taskDate,

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:taskmina/presentation/common_widget/build_text.dart';
-import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/appbar_widget_builder.dart';
+import 'package:taskmina/presentation/main_screens/add_task_screen/add_task_screen.dart';
+import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/curved_container_widget_builder.dart';
 import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/task_item_widget_builder.dart';
 import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/tasks_days_widget.dart';
 import 'package:taskmina/presentation/resources/app_size_res.dart';
 import 'package:taskmina/presentation/resources/color_manger.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
+import '../../resources/route_animatin.dart';
 class TasksHomeScreen extends StatelessWidget {
   final todayName = DateFormat('EEEE').format(DateTime.now());
   final currentMonthName = DateFormat('MMM').format(DateTime.now());
+
+   TasksHomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +65,9 @@ class TasksHomeScreen extends StatelessWidget {
                           ),
                         ),
                         child: IconButton(icon: const Icon(Icons.add,color: Colors.white,
-                            ), onPressed: () {  },),
+                            ), onPressed: () {
+                          Navigator.of(context).push(createNavigateForStateless( CreateTaskScreen()));
+                        },),
                       )
                     ],
                   ),

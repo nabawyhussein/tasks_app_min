@@ -1,39 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:taskmina/presentation/resources/color_manger.dart';
+
+import '../resources/app_size_res.dart';
+import 'build_text.dart';
 
 class BuildTextField extends StatelessWidget {
   final TextEditingController? controller;
-  final FormFieldValidator<String>? validator;
-  final TextInputType? textInputType;
-  final GestureTapCallback? onTap;
-  final String? labelText;
-  final TextAlign? textAlign;
+  final String headerTxt;
+  final double? width;
 
   const BuildTextField({
     Key? key,
-    this.controller,
-    this.validator,
-    this.textInputType,
-    this.onTap,
-    this.textAlign = TextAlign.start,
-    this.labelText,
+    this.width,
+    required this.headerTxt,
+    required this.controller,
+
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-        controller: controller,
-        keyboardType: textInputType,
-        textAlign: textAlign!,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          // enabledBorder: showBorders!?null:InputBorder.none,
-          // disabledBorder:showBorders!?null:InputBorder.none,
-          // focusedBorder:showBorders!?null:InputBorder.none,
-          // filled: true,
-          // fillColor: fillColor??ColorManger.fillBackGroundColor.withOpacity(.5),
-          contentPadding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-          hintText: "$labelText",
-        ),
-        validator: validator);
+    return SizedBox(
+      width: width??AppSize.size(context).width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BuildText(
+            txt: headerTxt,
+            fontSize: AppSize.size(context).width*0.045,
+            fontWeight: FontWeight.w700,
+            color: ColorManger.primarySecondColor,
+          ),
+          TextFormField(
+              controller: controller,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide:  BorderSide(color: ColorManger.primarySecondColor,
+                        width: 2
+                    ),
+                  ),
+                disabledBorder: UnderlineInputBorder(
+                  borderSide:  BorderSide(color: ColorManger.primarySecondColor,
+                      width: 2
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide:  BorderSide(color: ColorManger.primarySecondColor,
+                      width: 2
+                  ),
+                ),
+                errorBorder: UnderlineInputBorder(
+                  borderSide:  BorderSide(color: ColorManger.error,
+                      width: 2
+                  ),
+                ),
+                contentPadding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please Enter Correct Data";
+              }
+
+              return null;
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
