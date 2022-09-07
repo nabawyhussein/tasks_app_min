@@ -72,21 +72,7 @@ class CreateTaskScreen extends StatelessWidget {
                     SizedBox(
                       height: AppSize.size(context).height * 0.04,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TimePickerBuilder(
-                          headerTxt: 'Start',
-                          controller: taskTimeStartController,
-                          width: AppSize.size(context).width * 0.35,
-                        ),
-                        TimePickerBuilder(
-                          headerTxt: 'End',
-                          controller: taskTimeEndController,
-                          width: AppSize.size(context).width * 0.35,
-                        ),
-                      ],
-                    ),
+                    taskTime(context),
                     SizedBox(
                       height: AppSize.size(context).height * 0.04,
                     ),
@@ -97,32 +83,34 @@ class CreateTaskScreen extends StatelessWidget {
                     SizedBox(
                       height: AppSize.size(context).height * 0.1,
                     ),
-                    BuildButtonWidget(
-                      txt: 'Add Task',
-                      onPressed: () {
-                        final FormState? form = createTaskFormKey.currentState;
-                        if (form!.validate() == true) {
-                          if (taskTimeEndController.text.isEmpty) {
-                            createToast("Enter Valid End Time");
-                          } else if (taskTimeStartController.text.isEmpty) {
-                            createToast("Enter Valid Start Time");
-                          } else {
-                            TasksOperationsCubit addTask =
-                                BlocProvider.of<TasksOperationsCubit>(context);
+                    Center(
+                      child: BuildButtonWidget(
+                        txt: 'Add Task',
+                        onPressed: () {
+                          final FormState? form = createTaskFormKey.currentState;
+                          if (form!.validate() == true) {
+                            if (taskTimeEndController.text.isEmpty) {
+                              createToast("Enter Valid End Time");
+                            } else if (taskTimeStartController.text.isEmpty) {
+                              createToast("Enter Valid Start Time");
+                            } else {
+                              TasksOperationsCubit addTask =
+                                  BlocProvider.of<TasksOperationsCubit>(context);
 
-                            TaskModel newTaskVm = TaskModel(
-                                taskDate: taskDateController.text,
-                                taskDescription: taskDescriptionController.text,
-                                taskEndTime: taskTimeEndController.text,
-                                taskName: taskNameController.text,
-                                taskStartTime: taskTimeStartController.text,
-                                taskCategory: "");
-                            addTask.addTask(newTaskVm);
-                            Navigator.of(context).pop();
-                            createToast("TaskCreated Successfully");
+                              TaskModel newTaskVm = TaskModel(
+                                  taskDate: taskDateController.text,
+                                  taskDescription: taskDescriptionController.text,
+                                  taskEndTime: taskTimeEndController.text,
+                                  taskName: taskNameController.text,
+                                  taskStartTime: taskTimeStartController.text,
+                                  taskCategory: "");
+                              addTask.addTask(newTaskVm);
+                              Navigator.of(context).pop();
+                              createToast("TaskCreated Successfully");
+                            }
                           }
-                        }
-                      },
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -132,6 +120,24 @@ class CreateTaskScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Row taskTime(BuildContext context) {
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TimePickerBuilder(
+                        headerTxt: 'Start',
+                        controller: taskTimeStartController,
+                        width: AppSize.size(context).width * 0.35,
+                      ),
+                      TimePickerBuilder(
+                        headerTxt: 'End',
+                        controller: taskTimeEndController,
+                        width: AppSize.size(context).width * 0.35,
+                      ),
+                    ],
+                  );
   }
 
   Row selectTaskDate(BuildContext context) {

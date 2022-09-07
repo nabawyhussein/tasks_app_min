@@ -30,8 +30,8 @@ class BuildButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       child: Container(
         alignment: Alignment.center,
-        width: AppSize.size(context).width,
-        height: AppSize.size(context).height * 0.06,
+        width: AppSize.size(context).width*0.6,
+        height: AppSize.size(context).height * 0.065,
         child: Text(txt,
             textAlign: TextAlign.center,
             style: TextStyle(
