@@ -6,6 +6,7 @@ import 'package:taskmina/presentation/common_widget/build_button_widget.dart';
 import 'package:taskmina/presentation/common_widget/build_date_picker.dart';
 import 'package:taskmina/presentation/common_widget/build_text_field.dart';
 import 'package:taskmina/presentation/common_widget/build_toast.dart';
+import 'package:taskmina/presentation/main_screens/tasks_home_screen/select_task_category_widget.dart';
 
 import '../../common_widget/build_text.dart';
 import '../../common_widget/build_time_picker.dart';
@@ -49,44 +50,14 @@ class CreateTaskScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BuildText(
-                          txt: 'Create New Tasks',
-                          fontSize: AppSize.size(context).width*0.08,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Icon(Icons.event_note_rounded,
-                          color: ColorManger.primarySecondColor,
-                          size: AppSize.size(context).width*0.1,
-
-                        )
-                      ],
-                    ),
-                    SizedBox(height: AppSize.size(context).height*0.03,),
+                    header(context),
+                    SizedBox(height: AppSize.size(context).height*0.02,),
                     BuildTextField(controller: taskNameController,headerTxt: "Task Name",),
-                    SizedBox(height: AppSize.size(context).height*0.05,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BuildDatePicker(textController: taskDateController,headerTxt: "Date",
-                        width: AppSize.size(context).width*0.45,
-                        ),
-                        Container(
-                          height: AppSize.size(context).height*0.06,
-                          decoration: BoxDecoration(
-                            color: ColorManger.primary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: IconButton(icon: const
-                          Icon(Icons.calendar_today_outlined,color: Colors.white,
-                          ), onPressed: () {
-                          },),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: AppSize.size(context).height*0.05,),
+
+                    const SelectCategoryWidget(),
+
+                    selectTaskDate(context),
+                    SizedBox(height: AppSize.size(context).height*0.04,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -100,10 +71,10 @@ class CreateTaskScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSize.size(context).height*0.05,),
+                    SizedBox(height: AppSize.size(context).height*0.04,),
                     BuildTextField(controller: taskDescriptionController,
                       headerTxt: "Description",),
-                    SizedBox(height: AppSize.size(context).height*0.15,),
+                    SizedBox(height: AppSize.size(context).height*0.1,),
                     BuildButtonWidget(txt: 'Add Task',
                     onPressed: (){
                       final FormState? form = createTaskFormKey.currentState;
@@ -131,7 +102,6 @@ class CreateTaskScreen extends StatelessWidget {
                       }
                     },
                     )
-
                   ],
                 ),
               ),
@@ -140,5 +110,45 @@ class CreateTaskScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Row selectTaskDate(BuildContext context) {
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BuildDatePicker(textController: taskDateController,headerTxt: "Date",
+                      width: AppSize.size(context).width*0.45,
+                      ),
+                      Container(
+                        height: AppSize.size(context).height*0.06,
+                        decoration: BoxDecoration(
+                          color: ColorManger.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(icon: const
+                        Icon(Icons.calendar_today_outlined,color: Colors.white,
+                        ), onPressed: () {
+                        },),
+                      ),
+                    ],
+                  );
+  }
+
+  Row header(BuildContext context) {
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BuildText(
+                        txt: 'Create New Tasks',
+                        fontSize: AppSize.size(context).width*0.08,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      Icon(Icons.event_note_rounded,
+                        color: ColorManger.primarySecondColor,
+                        size: AppSize.size(context).width*0.1,
+
+                      )
+                    ],
+                  );
   }
 }
