@@ -20,13 +20,13 @@ class BuildDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width??AppSize.size(context).width,
+      width: width ?? AppSize.size(context).width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BuildText(
             txt: headerTxt,
-            fontSize: AppSize.size(context).width*0.045,
+            fontSize: AppSize.size(context).width * 0.045,
             fontWeight: FontWeight.w700,
             color: ColorManger.primarySecondColor,
           ),
@@ -47,33 +47,31 @@ class BuildDatePicker extends StatelessWidget {
                 controller: textController,
                 textAlign: TextAlign.start,
                 decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    disabledBorder:UnderlineInputBorder(
-                      borderSide:  BorderSide(color: ColorManger.primarySecondColor,
-                        width: 2
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:  BorderSide(color: ColorManger.primarySecondColor,
-                          width: 2
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide:  BorderSide(color: ColorManger.primarySecondColor,
-                          width: 2
-                      ),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide:  BorderSide(color: ColorManger.error,
-                          width: 2),
-                    ),
-
+                  border: InputBorder.none,
+                  disabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: ColorManger.primarySecondColor, width: 2),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: ColorManger.primarySecondColor, width: 2),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: ColorManger.primarySecondColor, width: 2),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: ColorManger.error, width: 2),
+                  ),
                 ),
-                onChanged: (val){
-                  final taskDayName = DateFormat('EEEE').format(DateTime.parse(val));
-                  final currentMonthName = DateFormat('MMM').format(DateTime.parse(val));
-                  final todayNum = val.substring(5,7);
-                  textController.text= taskDayName+", "+todayNum+" "+currentMonthName;
+                onChanged: (val) {
+                  final taskDayName =
+                      DateFormat('EEEE').format(DateTime.parse(val));
+                  final currentMonthName =
+                      DateFormat('MMM').format(DateTime.parse(val));
+                  final todayNum = val.substring(5, 7);
+                  textController.text =
+                      taskDayName + ", " + todayNum + " " + currentMonthName;
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {

@@ -9,14 +9,15 @@ import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/tas
 import 'package:taskmina/presentation/main_screens/tasks_home_screen/widgets/tasks_days_widget.dart';
 import 'package:taskmina/presentation/resources/app_size_res.dart';
 import 'package:taskmina/presentation/resources/color_manger.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 import '../../resources/route_animatin.dart';
+
 class TasksHomeScreen extends StatelessWidget {
   final todayName = DateFormat('EEEE').format(DateTime.now());
   final currentMonthName = DateFormat('MMM').format(DateTime.now());
 
-   TasksHomeScreen({Key? key}) : super(key: key);
+  TasksHomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,31 +28,32 @@ class TasksHomeScreen extends StatelessWidget {
             headerWidget(context),
             const BuildCurcvedContainer(),
             BlocBuilder<TasksOperationsCubit, TasksOperationsState>(
-  builder: (context, state) {
-    TasksOperationsCubit tasksCubit = BlocProvider.of<TasksOperationsCubit>(context);
-    return Expanded(
-              child:
-              tasksCubit.tasksList.isEmpty?
-                  Center(
-                    child: BuildText(
-                      txt: "No Tasks Yet",
-                      color: Colors.white,
-                      fontSize: AppSize.size(context).width*0.06,
-                      fontWeight: FontWeight.w600,),
-                  )
-                  :
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: tasksCubit.tasksList.length,
-                  itemBuilder: (context, index) {
-                    return  TaskWidgetItemBuilder(taskModel: tasksCubit.tasksList[index],);
-                  }),
-            );
-  },
-)
-
+              builder: (context, state) {
+                TasksOperationsCubit tasksCubit =
+                    BlocProvider.of<TasksOperationsCubit>(context);
+                return Expanded(
+                  child: tasksCubit.tasksList.isEmpty
+                      ? Center(
+                          child: BuildText(
+                            txt: "No Tasks Yet",
+                            color: Colors.white,
+                            fontSize: AppSize.size(context).width * 0.06,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemCount: tasksCubit.tasksList.length,
+                          itemBuilder: (context, index) {
+                            return TaskWidgetItemBuilder(
+                              taskModel: tasksCubit.tasksList[index],
+                            );
+                          }),
+                );
+              },
+            )
           ],
         ),
       ),
@@ -60,54 +62,90 @@ class TasksHomeScreen extends StatelessWidget {
 
   Container headerWidget(BuildContext context) {
     return Container(
-            color: Colors.white,
-            child: Padding(
-              padding:  EdgeInsets.all(AppSize.size(context).width*0.05),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BuildText(
-                        txt: 'My Tasks',
-                        fontSize: AppSize.size(context).width*0.09,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      Container(
-                        height: AppSize.size(context).height*0.06,
-                        decoration: BoxDecoration(
-                          color: ColorManger.primary,
-                          borderRadius: BorderRadius.circular(
-                            AppSize.size(context).width*0.03,
-                          ),
-                        ),
-                        child: IconButton(icon: const Icon(Icons.add,color: Colors.white,
-                            ), onPressed: () {
-                          Navigator.of(context).push(createNavigateForStateless( CreateTaskScreen()));
-                        },),
-                      )
-                    ],
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.all(AppSize.size(context).width * 0.05),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.notes_outlined,
+                  color: Colors.black,
+                  size: AppSize.size(context).height * 0.04,
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: ColorManger.primarySecondColor,
+                    size: AppSize.size(context).height * 0.04,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BuildText(
-                        txt: 'Today',
-                        fontSize: AppSize.size(context).width*0.06,
-                        fontWeight: FontWeight.w600,),
-                      BuildText(
-                        txt: todayName+", "+DateTime.now().day.toString()+" "+currentMonthName,
-                        fontSize: AppSize.size(context).width*0.035,
-                        color: ColorManger.primarySecondColor,
-                        fontWeight: FontWeight.w600,),
-
-                    ],
-                  ),
-
-                  const TasksDaysListWidget(),
-                ],
-              ),
+                  onPressed: () {},
+                )
+              ],
             ),
-          );
+            SizedBox(
+              height: AppSize.size(context).height * 0.02,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BuildText(
+                  txt: 'My Tasks',
+                  fontSize: AppSize.size(context).width * 0.09,
+                  fontWeight: FontWeight.bold,
+                ),
+                Container(
+                  height: AppSize.size(context).height * 0.06,
+                  decoration: BoxDecoration(
+                    color: ColorManger.primary,
+                    borderRadius: BorderRadius.circular(
+                      AppSize.size(context).width * 0.03,
+                    ),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(createNavigateForStateless(CreateTaskScreen()));
+                    },
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: AppSize.size(context).height * 0.015,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BuildText(
+                  txt: 'Today',
+                  fontSize: AppSize.size(context).width * 0.06,
+                  fontWeight: FontWeight.w600,
+                ),
+                BuildText(
+                  txt: todayName +
+                      ", " +
+                      DateTime.now().day.toString() +
+                      " " +
+                      currentMonthName,
+                  fontSize: AppSize.size(context).width * 0.035,
+                  color: ColorManger.primarySecondColor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSize.size(context).height * 0.02,
+            ),
+            const TasksDaysListWidget(),
+          ],
+        ),
+      ),
+    );
   }
 }

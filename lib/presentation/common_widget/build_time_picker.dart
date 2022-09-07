@@ -11,6 +11,7 @@ class TimePickerBuilder extends StatefulWidget {
   final ValueChanged? onChange;
   final String headerTxt;
   final double? width;
+
   TimePickerBuilder({
     required this.controller,
     this.onTap,
@@ -32,13 +33,13 @@ class _TimePickerBuilderState extends State<TimePickerBuilder> {
         showTimePick(widget.controller);
       },
       child: SizedBox(
-        width: widget.width??AppSize.size(context).width,
+        width: widget.width ?? AppSize.size(context).width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BuildText(
               txt: widget.headerTxt,
-              fontSize: AppSize.size(context).width*0.045,
+              fontSize: AppSize.size(context).width * 0.045,
               fontWeight: FontWeight.w700,
               color: ColorManger.primarySecondColor,
             ),
@@ -47,10 +48,16 @@ class _TimePickerBuilderState extends State<TimePickerBuilder> {
                 Expanded(
                   child: Text(widget.controller.text),
                 ),
-                Icon(Icons.keyboard_arrow_down,color: ColorManger.primarySecondColor,)
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  color: ColorManger.primarySecondColor,
+                )
               ],
             ),
-            const Divider(color: ColorManger.primarySecondColor,thickness: 2,)
+            const Divider(
+              color: ColorManger.primarySecondColor,
+              thickness: 2,
+            )
           ],
         ),
       ),
@@ -61,7 +68,6 @@ class _TimePickerBuilderState extends State<TimePickerBuilder> {
     final TimeOfDay? result = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
-
     );
     if (result != null) {
       setState(() {

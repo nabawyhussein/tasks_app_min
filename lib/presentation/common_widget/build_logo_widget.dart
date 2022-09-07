@@ -12,8 +12,8 @@ class BuildLogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       img,
-      height: AppSize.size(context).height*0.3,
-      width: AppSize.size(context).width*0.9,
+      height: AppSize.size(context).height * 0.3,
+      width: AppSize.size(context).width * 0.9,
     );
   }
 }

@@ -11,27 +11,31 @@ class SelectCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: AppSize.size(context).height*0.03,),
+        SizedBox(
+          height: AppSize.size(context).height * 0.03,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BuildText(
               txt: 'Select Category',
-              fontSize: AppSize.size(context).width*0.045,
+              fontSize: AppSize.size(context).width * 0.045,
               fontWeight: FontWeight.bold,
               color: ColorManger.primarySecondColor,
             ),
             BuildText(
-              txt:"see all",
-              fontSize: AppSize.size(context).width*0.04,
+              txt: "see all",
+              fontSize: AppSize.size(context).width * 0.04,
               color: ColorManger.primarySecondColor,
-              fontWeight: FontWeight.w600,),
-
+              fontWeight: FontWeight.w600,
+            ),
           ],
         ),
-        SizedBox(height: AppSize.size(context).height*0.02,),
         SizedBox(
-          height: AppSize.size(context).height*0.045,
+          height: AppSize.size(context).height * 0.02,
+        ),
+        SizedBox(
+          height: AppSize.size(context).height * 0.045,
           child: ListView.builder(
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
@@ -39,30 +43,33 @@ class SelectCategoryWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 9,
               itemBuilder: (context, index) {
-                return  Container(
+                return Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(right: AppSize.size(context).width*0.04),
-                  padding: EdgeInsets.symmetric(horizontal:
-                  AppSize.size(context).width*0.04,),
-                  decoration: BoxDecoration(
-                      color:index ==0 ? ColorManger.primary:Colors.white,
-                      borderRadius: BorderRadius.circular(
-                        AppSize.size(context).width*0.035,
-                      ),
-                      border: Border.all(
-                          color: ColorManger.primary
-                      )
+                  margin: EdgeInsets.only(
+                      right: AppSize.size(context).width * 0.04),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSize.size(context).width * 0.04,
                   ),
+                  decoration: BoxDecoration(
+                      color: index == 0 ? ColorManger.primary : Colors.white,
+                      borderRadius: BorderRadius.circular(
+                        AppSize.size(context).width * 0.035,
+                      ),
+                      border: Border.all(color: ColorManger.primary)),
                   child: BuildText(
                     txt: "Research",
-                    fontSize: AppSize.size(context).width*0.04,
+                    fontSize: AppSize.size(context).width * 0.04,
                     fontWeight: FontWeight.w600,
-                    color: index !=0 ? ColorManger.primarySecondColor :Colors.white,
+                    color: index != 0
+                        ? ColorManger.primarySecondColor
+                        : Colors.white,
                   ),
                 );
               }),
         ),
-        SizedBox(height: AppSize.size(context).height*0.03,),
+        SizedBox(
+          height: AppSize.size(context).height * 0.03,
+        ),
       ],
     );
   }
