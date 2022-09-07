@@ -85,7 +85,7 @@ class CreateTaskScreen extends StatelessWidget {
                     ),
                     Center(
                       child: BuildButtonWidget(
-                        txt: 'Add Task',
+                        txt: 'Create Task',
                         onPressed: () {
                           createTask(context);
                         },
