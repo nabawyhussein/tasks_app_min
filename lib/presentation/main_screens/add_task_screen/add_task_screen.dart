@@ -87,28 +87,7 @@ class CreateTaskScreen extends StatelessWidget {
                       child: BuildButtonWidget(
                         txt: 'Add Task',
                         onPressed: () {
-                          final FormState? form = createTaskFormKey.currentState;
-                          if (form!.validate() == true) {
-                            if (taskTimeEndController.text.isEmpty) {
-                              createToast("Enter Valid End Time");
-                            } else if (taskTimeStartController.text.isEmpty) {
-                              createToast("Enter Valid Start Time");
-                            } else {
-                              TasksOperationsCubit addTask =
-                                  BlocProvider.of<TasksOperationsCubit>(context);
-
-                              TaskModel newTaskVm = TaskModel(
-                                  taskDate: taskDateController.text,
-                                  taskDescription: taskDescriptionController.text,
-                                  taskEndTime: taskTimeEndController.text,
-                                  taskName: taskNameController.text,
-                                  taskStartTime: taskTimeStartController.text,
-                                  taskCategory: "");
-                              addTask.addTask(newTaskVm);
-                              Navigator.of(context).pop();
-                              createToast("TaskCreated Successfully");
-                            }
-                          }
+                          createTask(context);
                         },
                       ),
                     )
@@ -183,5 +162,30 @@ class CreateTaskScreen extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void createTask(BuildContext context) {
+    final FormState? form = createTaskFormKey.currentState;
+    if (form!.validate() == true) {
+      if (taskTimeEndController.text.isEmpty) {
+        createToast("Enter Valid End Time");
+      } else if (taskTimeStartController.text.isEmpty) {
+        createToast("Enter Valid Start Time");
+      } else {
+        TasksOperationsCubit addTask =
+        BlocProvider.of<TasksOperationsCubit>(context);
+
+        TaskModel newTaskVm = TaskModel(
+            taskDate: taskDateController.text,
+            taskDescription: taskDescriptionController.text,
+            taskEndTime: taskTimeEndController.text,
+            taskName: taskNameController.text,
+            taskStartTime: taskTimeStartController.text,
+            taskCategory: "");
+        addTask.addTask(newTaskVm);
+        Navigator.of(context).pop();
+        createToast("TaskCreated Successfully");
+      }
+    }
   }
 }
