@@ -6,7 +6,7 @@ import 'package:taskmina/presentation/common_widget/build_button_widget.dart';
 import 'package:taskmina/presentation/common_widget/build_date_picker.dart';
 import 'package:taskmina/presentation/common_widget/build_text_field.dart';
 import 'package:taskmina/presentation/common_widget/build_toast.dart';
-import 'package:taskmina/presentation/main_screens/tasks_home_screen/select_task_category_widget.dart';
+import 'package:taskmina/presentation/main_screens/add_task_screen/widgets/select_task_category_widget.dart';
 
 import '../../common_widget/build_text.dart';
 import '../../common_widget/build_time_picker.dart';

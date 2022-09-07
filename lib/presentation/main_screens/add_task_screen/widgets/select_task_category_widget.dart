@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../common_widget/build_text.dart';
-import '../../resources/app_size_res.dart';
-import '../../resources/color_manger.dart';
+import '../../../common_widget/build_text.dart';
+import '../../../resources/app_size_res.dart';
+import '../../../resources/color_manger.dart';
 
 class SelectCategoryWidget extends StatelessWidget {
   const SelectCategoryWidget({Key? key}) : super(key: key);
@@ -41,8 +41,7 @@ class SelectCategoryWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return  Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal:
-                  AppSize.size(context).width*0.02),
+                  margin: EdgeInsets.only(right: AppSize.size(context).width*0.04),
                   padding: EdgeInsets.symmetric(horizontal:
                   AppSize.size(context).width*0.04,),
                   decoration: BoxDecoration(

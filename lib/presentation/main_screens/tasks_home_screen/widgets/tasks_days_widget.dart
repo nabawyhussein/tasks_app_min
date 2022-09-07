@@ -19,7 +19,7 @@ class TasksDaysListWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return  Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: AppSize.size(context).width*0.02),
+              margin: EdgeInsets.only(right: AppSize.size(context).width*0.04),
               padding: EdgeInsets.symmetric(horizontal: AppSize.size(context).width*0.04,
                   vertical: AppSize.size(context).width*0.01
               ),
