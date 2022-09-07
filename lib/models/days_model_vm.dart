@@ -1,5 +1,5 @@
-class DaysCalenderVM {
-  String dayLetter;
+class TaskCategory {
+  String categoryName;
 
-  DaysCalenderVM({required this.dayLetter});
+  TaskCategory({required this.categoryName});
 }

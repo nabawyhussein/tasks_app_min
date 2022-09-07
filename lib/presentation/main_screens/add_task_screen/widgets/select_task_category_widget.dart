@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmina/data/local_dummy_data/tasks_categories_data.dart';
 
 import '../../../common_widget/build_text.dart';
 import '../../../resources/app_size_res.dart';
@@ -41,7 +42,7 @@ class SelectCategoryWidget extends StatelessWidget {
               physics: const ClampingScrollPhysics(),
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
-              itemCount: 9,
+              itemCount: CategoriesData.tasksCategoryList.length,
               itemBuilder: (context, index) {
                 return Container(
                   alignment: Alignment.center,
@@ -57,7 +58,7 @@ class SelectCategoryWidget extends StatelessWidget {
                       ),
                       border: Border.all(color: ColorManger.primary)),
                   child: BuildText(
-                    txt: "Research",
+                    txt: CategoriesData.tasksCategoryList[index].categoryName,
                     fontSize: AppSize.size(context).width * 0.04,
                     fontWeight: FontWeight.w600,
                     color: index != 0
